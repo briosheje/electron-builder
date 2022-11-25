@@ -8,7 +8,7 @@ type NullOrUndefinedOrString = null | undefined | string;
  * @param [regionCode] Targeted region (ex: us-east-1)
  * @returns 
  */
- function toVirtualHostedSiteUrl(bucketName: string, regionCode?: NullOrUndefinedOrString) {
+export default function toVirtualHostedSiteUrl(bucketName: string, regionCode?: NullOrUndefinedOrString) {
   if (!bucketName) {
     throw new Error(`bucketName is mandatory to calculate the AWS virtual hosted style access url.`);
   }

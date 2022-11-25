@@ -1,4 +1,5 @@
 import { OutgoingHttpHeaders } from "http"
+import toVirtualHostedSiteUrl from './s3utils/toVirtualHostedStyleUrl';
 
 export type PublishProvider = "github" | "s3" | "spaces" | "generic" | "custom" | "snapStore" | "keygen" | "bitbucket"
 
