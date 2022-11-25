@@ -387,21 +387,10 @@ function s3Url(options: S3Options) {
   let url: string
   if (options.endpoint != null) {
     url = `${options.endpoint}/${options.bucket}`
-  } else if (options.bucket.includes(".")) {
-    if (options.region == null) {
-      throw new Error(`Bucket name "${options.bucket}" includes a dot, but S3 region is missing`)
-    }
-
-    // special case, see http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro
-    if (options.region === "us-east-1") {
-      url = `https://s3.amazonaws.com/${options.bucket}`
-    } else {
-      url = `https://s3-${options.region}.amazonaws.com/${options.bucket}`
-    }
-  } else if (options.region === "cn-north-1") {
-    url = `https://${options.bucket}.s3.${options.region}.amazonaws.com.cn`
   } else {
-    url = `https://${options.bucket}.s3.amazonaws.com`
+    url = toVirtualHostedSiteUrl(
+      options.bucket, options.region
+    );
   }
   return appendPath(url, options.path)
 }
